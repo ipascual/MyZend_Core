@@ -1,0 +1,13 @@
+{
+    "name": "myzend/core",
+    "description": "MyZend Core is a group of required classes for MyZend pacakges.",
+    "authors": [
+        {
+            "name": "Ignacio Pascual",
+            "email": "ipascual@unexpectedit.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+    }
+ }
