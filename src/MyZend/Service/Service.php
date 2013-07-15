@@ -96,6 +96,23 @@ class Service
         return $result;
     }
 
+	
+    /**
+     * Make sure the object belongs to the current user
+     *
+     * $this->setMyField($value) === $this->setData('my_field', $value)
+     * Uses cache to eliminate unneccessary preg_replace
+     *
+     * @param Object $obj
+	 * @param User $user
+	 * @param string $action
+     * @return no return
+     */
+	public function isAllow($obj, $user, $action = null){
+		if (($obj != null && $obj->getOwner() && $user != null && $obj->getOwner()->getId() != $user->getId())) {
+			throw new \Exception("There was an error on your request.");
+		} 
+	}
 
 	
 }
