@@ -7,15 +7,17 @@ use Zend\ModuleManager\Feature\AutoloaderProviderInterface,
     Zend\ModuleManager\Feature\ServiceProviderInterface,
     Zend\Session\SessionManager,
 	Zend\Session\Config\StandardConfig;
-	
-	//Zend\Session\Config\SessionConfig,
-	//Zend\Session\Container;
+
+require_once(dirname(__FILE__)."/src/lib/CommonFunctions.php");
+require_once(dirname(__FILE__)."/src/lib/StringFunctions.php");
 
 class Module implements 
 	AutoloaderProviderInterface,
 	ServiceProviderInterface
 {
+	
    public function onBootstrap(Event $e) {
+   	
         $application = $e->getParam('application');
 		$config = $application->getConfig();
 
