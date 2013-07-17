@@ -127,3 +127,29 @@ function cleanString($text) {
 	return ($text);
 }
 
+/**
+ * Returns a string limited by number and followed by "..." if needed.
+ * 
+ * @param string $string to limit
+ * @param integer $limit number of characters to print.
+ * 
+ * @return string
+ */
+function strLimit($string, $limit) {
+	if(function_exists("mb_substr")) {
+		if(mb_strlen($string) > $limit) { 
+			return mb_substr($string, 0, $limit, 'utf-8') . "...";
+		}
+		else {
+			return $string;
+		}
+	}
+	else {
+		if(strlen($string) > $limit) {
+			return substr($post->post_content, 0, $limit);
+		}
+		else {
+			return $string;
+		}
+	}
+}
