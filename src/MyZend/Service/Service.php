@@ -54,6 +54,11 @@ class Service
 		$newService->document = $map["targetDocument"];
 		return $newService;
 	}
+
+	public function flush() {
+		$this->dm->flush();
+		$this->dm->clear();
+	}
 	
     /**
      * Add/Del attribute wrapper
