@@ -41,9 +41,15 @@ class Object
     {
         switch (substr($method, 0, 3)) {
             case 'get' :
+		    	//Try to find a property name like: firstName
+ 				$key = lcfirst(substr($method,3));
+				$index = isset($args[0]) ? $args[0] : null;
+		    	if(($index === null) && isset($this->$key)) {
+		    		return $this->$key;
+		    	}				
+		    	//Try to find a property name like: first_name
                 $key = $this->_underscore(substr($method,3));
 				$index = isset($args[0]) ? $args[0] : null;
-		    	//Try to find a property
 		    	if(($index === null) && isset($this->$key)) {
 		    		return $this->$key;
 		    	}
@@ -59,6 +65,11 @@ class Object
 				}
 				return "";
             case 'set' :
+				// Try properties : firstName
+                $key = $this->_underscore(substr($method,3));
+				$result = isset($args[0]) ? $args[0] : null;
+				$this->$key = $result;
+				// Try properties : first_name
                 $key = $this->_underscore(substr($method,3));
 				$result = isset($args[0]) ? $args[0] : null;
 				$this->$key = $result;
