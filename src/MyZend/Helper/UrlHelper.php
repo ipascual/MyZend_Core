@@ -1,7 +1,9 @@
 <?php
 namespace MyZend\Helper;
 
-class UrlHelper
+use MyZend\Core\Object;
+
+class UrlHelper extends Object
 {
 	
 	public function __construct($sm) {

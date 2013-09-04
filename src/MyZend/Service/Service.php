@@ -1,9 +1,10 @@
 <?php
 namespace MyZend\Service;
 
+use MyZend\Core\Object;
 use MyZend\Service\Service as Service;
 
-class Service
+class Service extends Object
 {
 
 	/**

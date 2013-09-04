@@ -1,9 +1,10 @@
 <?php
 namespace MyZend\Factory;
 
+use MyZend\Core\Object;
 use Zend\Session\Container;
 
-class Session
+class Session extends Object
 {
 	private $session; 
 	
