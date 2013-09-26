@@ -22,11 +22,15 @@ class Module implements
 		$config = $application->getConfig();
 
 		//PHP settings
-        if(isset($config['myzend']['php_settings'])) {
-            foreach($config['myzend']['php_settings'] as $key => $value) {
-                ini_set($key, $value);
-            }
-        }
+		if(isset($config['myzend']['php_settings'])) {
+		    foreach($config['myzend']['php_settings'] as $key => $value) {
+		        ini_set($key, $value);
+				// Timezone
+				if($key == "date.timezone") {
+					date_default_timezone_set($value);
+				}
+		    }
+		}
 		
 		$standardConfig = new StandardConfig();
 		$standardConfig->setOptions(array(
