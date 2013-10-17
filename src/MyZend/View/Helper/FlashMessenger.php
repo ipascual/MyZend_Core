@@ -8,33 +8,36 @@ class FlashMessenger extends AbstractHelper
     public function html()
     {
         $flashMessenger = new \Zend\Mvc\Controller\Plugin\FlashMessenger();
-
+		$html = "";
+		
 		//Error		
 		if($flashMessenger->setNamespace("error")->hasMessages()) {
+			$class = "alert alert-error";
 			foreach($flashMessenger->setNamespace("error")->getMessages() as $msg) {
-				$html = '<div class="alert alert-error"><i class="icon-remove-sign"></i>' . PHP_EOL;
+				$html .= '<div class="'.$class.'"><i class="icon-remove-sign">' . PHP_EOL;
 				$html .= $msg . PHP_EOL;	
 				$html .= "</div>" . PHP_EOL;
 			}
-			echo $html;
 		}
 		//Notice		
 		if($flashMessenger->setNamespace("notice")->hasMessages()) {
+			$class = "alert alert-info";
 			foreach($flashMessenger->setNamespace("notice")->getMessages() as $msg) {
-				$html = '<div class="alert alert-info"><i class="icon-exclamation-sign"></i>' . PHP_EOL;
+				$html .= '<div class="'.$class.'"><i class="icon-exclamation-sign"></i>' . PHP_EOL;
 				$html .= $msg . PHP_EOL;	
 				$html .= "</div>" . PHP_EOL;
 			}
-			echo $html;
 		}
 		//Success		
 		if($flashMessenger->setNamespace("success")->hasMessages()) {
+			$class = "alert alert-success";
 			foreach($flashMessenger->setNamespace("success")->getMessages() as $msg) {
-				$html = '<div class="alert alert-success"><i class="icon-ok-sign"></i>' . PHP_EOL;
+				$html .= '<div class="'.$class.'"><i class="icon-ok-sign"></i>' . PHP_EOL;
 				$html .= $msg . PHP_EOL;	
 				$html .= "</div>" . PHP_EOL;
 			}
-			echo $html;
 		}
+		
+		echo $html;
     }
 }
