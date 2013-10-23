@@ -14,7 +14,7 @@ class FlashMessenger extends AbstractHelper
 		if($flashMessenger->setNamespace("error")->hasMessages()) {
 			$class = "alert alert-error";
 			foreach($flashMessenger->setNamespace("error")->getMessages() as $msg) {
-				$html .= '<div class="'.$class.'"><i class="icon-remove-sign">' . PHP_EOL;
+				$html .= '<div class="'.$class.'"><i class="icon-remove-sign"></i>' . PHP_EOL;
 				$html .= $msg . PHP_EOL;	
 				$html .= "</div>" . PHP_EOL;
 			}
