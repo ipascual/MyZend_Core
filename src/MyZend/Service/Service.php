@@ -120,5 +120,39 @@ class Service extends Object
 		} 
 	}
 
-	
+	/**
+	 * Returns a string with accent to REGEX expression to find any combinations
+	 * in accent insentive way
+	 * 
+	 * @author  Rafael Goulart (http://tech.rgou.net/en/php/pesquisas-nao-sensiveis-ao-caso-e-acento-no-mongodb-e-php/)
+	 * @param string $text The text.
+	 * @return string The REGEX text.
+	 */
+	const ACCENT_STRINGS = 'ŠŒŽšœžŸ¥µÀÁÂÃÄÅÆÇÈÉÊËẼÌÍÎÏĨÐÑÒÓÔÕÖØÙÚÛÜÝßàáâãäåæçèéêëẽìíîïĩðñòóôõöøùúûüýÿ';
+	const NO_ACCENT_STRINGS = 'SOZsozYYuAAAAAAACEEEEEIIIIIDNOOOOOOUUUUYsaaaaaaaceeeeeiiiiionoooooouuuuyy';
+	public function accentToRegex($text) {
+		$from = str_split(utf8_decode($this::ACCENT_STRINGS));
+		$to = str_split(strtolower($this::NO_ACCENT_STRINGS));
+		$text = utf8_decode($text);
+		$regex = array();
+
+		foreach ($to as $key => $value) {
+			if (isset($regex[$value])) {
+				$regex[$value] .= $from[$key];
+			} else {
+				$regex[$value] = $value;
+			}
+		}
+
+		foreach ($regex as $rg_key => $rg) {
+			$text = preg_replace("/[$rg]/", "_{$rg_key}_", $text);
+		}
+
+		foreach ($regex as $rg_key => $rg) {
+			$text = preg_replace("/_{$rg_key}_/", "[$rg]", $text);
+		}
+
+		return utf8_encode($text);
+	}
+
 }
