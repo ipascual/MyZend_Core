@@ -212,4 +212,8 @@ class Object
         return $values;
     }
 	
+	public function format($field, $formatter) {
+		return $formatter->filter(null, $this->$field);
+	}
+
 }

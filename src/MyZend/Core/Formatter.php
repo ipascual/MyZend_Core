@@ -23,7 +23,15 @@ class Formatter extends Object {
 		$this->area = ($area == null) ? self::AREA_UNIT_SQM : $area;
 	}
 
-	public function filter($type, $value) {
+	public function filter($type = null, $value) {
+
+		if(! $type) {
+			if(is_object($value)) {
+				if(get_class($value) == "DateTime") {
+					$type = self::FORMAT_DATE;
+				}
+			}
+		}
 
 		switch($type) {
 			case self::FORMAT_CURRENCY:

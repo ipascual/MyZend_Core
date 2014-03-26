@@ -36,7 +36,7 @@ function ilog($object, $name = null) {
 }
 
 /**
- * Concert Array variable to stdClass
+ * Convert Array variable to stdClass
  * 
  * @param array $array
  * 
@@ -56,8 +56,43 @@ function arrayToObject($array) {
 			}
 		}
 		return $object;
-	}
-	else {
+	} else {
 		return FALSE;
 	}
+}
+
+/**
+ * Return an Array to proper CSV format line
+ * 
+ * @param array $data
+ * @param string $delimiter
+ * @param string $quote
+ * 
+ * @return string csvLine
+ */
+function arrayToCsv($data, $fields = array(), $delimiter = ',', $quote = '"') {
+	ob_start();
+	
+	$filteredData = array();
+	if(count($fields)) {
+		foreach($fields as $field) {
+			if(isset($data[$field])) {
+				$filteredData[] = $data[$field];
+			}
+			else {
+				$filteredData[] = "";
+			}
+		}
+	}
+	else {
+		$filteredData = $data;
+	}
+
+	$outstream = fopen("php://output", 'w');
+	fputcsv($outstream, $filteredData, $delimiter, $quote);
+	fclose($outstream);
+	$output = ob_get_contents();
+	ob_end_clean();
+
+	return $output.PHP_EOL;
 }
